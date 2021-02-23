@@ -18,6 +18,7 @@ extra-source-files:
 library
   exposed-modules:
       AST
+      Generator
   other-modules:
       Paths_interpreter
   hs-source-dirs:
