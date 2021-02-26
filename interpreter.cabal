@@ -20,6 +20,7 @@ library
       AST
       Generator
       Main
+      Parser
       Reducer
       Token
   other-modules:
