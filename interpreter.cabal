@@ -19,6 +19,7 @@ library
   exposed-modules:
       AST
       Generator
+      Main
       Reducer
       Token
   other-modules:
