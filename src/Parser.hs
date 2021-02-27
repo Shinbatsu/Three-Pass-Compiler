@@ -11,3 +11,10 @@ prior = Map.fromList [("+", 1), ("-", 1), ("*", 2), ("/", 2)]
 
 pass1 :: String -> AST
 pass1 program = buildAST tokens
+  where
+    tokens = tokenize program
+    buildAST :: [Token] -> AST
+    buildAST toks =
+      let (vars, bodyTokens) = parseVars toks
+          output = parseExpr vars (TChar '(' : bodyTokens ++ [TChar ')'])
+      in head output
