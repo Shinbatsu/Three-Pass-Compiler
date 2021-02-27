@@ -26,3 +26,14 @@ pass1 program = buildAST tokens
         go (TStr s : xs) acc    = go xs (s:acc)
         go (_:xs) acc           = go xs acc
     parseVars xs = ([], xs)
+
+    parseExpr :: [String] -> [Token] -> [AST]
+    parseExpr vars = go [] []
+      where
+        go out ops [] = out
+        go out ops (TInt n : ts) = go (Imm n : out) ops ts
+        go out ops (TStr s : ts)
+          | s `elem` vars =
+              let Just idx = elemIndex s vars
+              in go (Arg idx : out) ops ts
+          | otherwise = error $ "Unknown var " ++ s
