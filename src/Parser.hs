@@ -18,3 +18,11 @@ pass1 program = buildAST tokens
       let (vars, bodyTokens) = parseVars toks
           output = parseExpr vars (TChar '(' : bodyTokens ++ [TChar ')'])
       in head output
+
+    parseVars :: [Token] -> ([String], [Token])
+    parseVars (TChar '[' : rest) = go rest []
+      where
+        go (TChar ']' : xs) acc = (reverse acc, xs)
+        go (TStr s : xs) acc    = go xs (s:acc)
+        go (_:xs) acc           = go xs acc
+    parseVars xs = ([], xs)
