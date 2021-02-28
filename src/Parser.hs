@@ -46,3 +46,24 @@ pass1 program = buildAST tokens
               let (out', ops') = popWhile (\o -> o /= '(' && prec o >= prec op) out ops
               in go out' (op:ops') ts
         go out ops (_:ts) = go out ops ts
+
+        prec o = Map.findWithDefault 0 [o] prior
+
+        popUntilParen out (o:ops)
+          | o == '(' = (out, o:ops)
+          | otherwise =
+              let (x:y:ys) = out
+              in popUntilParen (combine o y x:ys) ops
+
+        popWhile _ out [] = (out, [])
+        popWhile cond out (o:ops)
+          | cond o =
+              let (x:y:ys) = out
+              in popWhile cond (combine o y x : ys) ops
+          | otherwise = (out, o:ops)
+
+        combine op a b = case op of
+          '+' -> Add a b
+          '-' -> Sub a b
+          '*' -> Mul a b
+          '/' -> Div a b
