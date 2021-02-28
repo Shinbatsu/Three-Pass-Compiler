@@ -37,3 +37,12 @@ pass1 program = buildAST tokens
               let Just idx = elemIndex s vars
               in go (Arg idx : out) ops ts
           | otherwise = error $ "Unknown var " ++ s
+        go out ops (TChar '(' : ts) = go out ('(':ops) ts
+        go out ops (TChar ')' : ts) =
+          let (out', ops') = popUntilParen out ops
+          in go out' (tail ops') ts
+        go out ops (TChar op : ts)
+          | [op] `Map.member` prior =
+              let (out', ops') = popWhile (\o -> o /= '(' && prec o >= prec op) out ops
+              in go out' (op:ops') ts
+        go out ops (_:ts) = go out ops ts
