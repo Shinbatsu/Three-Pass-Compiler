@@ -13,3 +13,46 @@ A simple compiler written in Haskell that translates a arithmetic language into 
 ├── Optimizer.hs -- Pass 2 (AST simplification)
 ├── Generator.hs -- Pass 3 (code generation)
 ├── Main.hs -- Main file
+
+
+### Usage
+
+1. oad the project in GHCi or compile it with GHC.
+2. Import the main module: `import Main`
+3. Call the compile function with a valid program string.
+
+### Example
+
+Given the input:
+
+```haskell
+compile "[x y] (x + 2) * (y - 3)"
+```
+
+It returns:
+
+```
+AR 0
+PU
+IM 2
+PU
+PO
+SW
+PO
+AD
+PU
+AR 1
+PU
+IM 3
+PU
+PO
+SW
+PO
+SU
+PU
+PO
+SW
+PO
+MU
+PU
+```
