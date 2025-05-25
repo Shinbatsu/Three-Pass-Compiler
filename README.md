@@ -3,7 +3,7 @@
 A simple compiler that translates a arithmetic expression into a stack-based asm code. The compiler works in three stages:
 
 1. **Pass 1**: Tokenizes and parses the source code into an abstract syntax tree (AST).
-2. **Pass 2**: Reducer the AST using constant folding.
+2. **Pass 2**: Reduces the AST via constant folding.
 3. **Pass 3**: Generates stack machine code from the optimized AST.
 
 ### Project Structure
