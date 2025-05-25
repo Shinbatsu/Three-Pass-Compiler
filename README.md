@@ -1,6 +1,6 @@
 # 3P Compiler
 
-A simple compiler that translates a arithmetic expression into a stack-based asm code. The compiler works in three stages:
+A simple compiler that translates an arithmetic expression into a stack-based asm code. The compiler works in three stages:
 
 1. **Pass 1**: Tokenizes and parses the source code into an abstract syntax tree (AST).
 2. **Pass 2**: Reduces the AST via constant folding.
